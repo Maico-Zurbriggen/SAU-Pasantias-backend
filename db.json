@@ -1,0 +1,72 @@
+{
+  "empresas": [
+    {
+      "id": "f87d",
+      "razonSocial": "epec",
+      "email": "epec@gmail.com",
+      "cuit": "12456783452",
+      "direccion": "Pasteur 165",
+      "telefono": "0356415362360",
+      "password": "epec1234",
+      "firstLogin": false
+    },
+    {
+      "id": "deb3",
+      "razonSocial": "maico",
+      "email": "zurbriggenmaico8@gmail.com",
+      "cuit": "20454848068",
+      "direccion": "Pasteur 165",
+      "telefono": "0356415362360",
+      "password": "maico123",
+      "firstLogin": false
+    },
+    {
+      "id": "7747",
+      "razonSocial": "teti",
+      "email": "teti@correo.com",
+      "cuit": "20454848068",
+      "direccion": "Pasteur 165",
+      "telefono": "0356415362360",
+      "password": "teti1234",
+      "firstLogin": false
+    },
+    {
+      "razonSocial": "gero",
+      "email": "gero@correo.com",
+      "cuit": "20454848068",
+      "direccion": "Pasteur 165",
+      "telefono": "0356415362360",
+      "password": "lRIiRXBZcR",
+      "firstLogin": false,
+      "id": "MYZ9Ktu",
+      "currentPassword": "lRIiRXBZcR",
+      "newPassword": "gero1234"
+    },
+    {
+      "razonSocial": "carlos",
+      "email": "carlos@correo.com",
+      "cuit": "20454848068",
+      "direccion": "Pasteur 165",
+      "telefono": "0356415362360",
+      "password": "carlos123",
+      "firstLogin": false,
+      "id": "Jmg0JkR"
+    }
+  ],
+  "admin": [
+    {
+      "id": "1",
+      "email": "admin@sau.com",
+      "password": "admin123"
+    }
+  ],
+  "alumnos_simulados": [
+    {
+      "id": "1",
+      "nombre": "Alumno Test",
+      "email": "alumno@test.com",
+      "legajo": "11111",
+      "password": "alumno123"
+    }
+  ]
+}
