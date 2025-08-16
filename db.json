@@ -1,10 +1,31 @@
 {
-  "empresas": [],
+  "empresas": [
+    {
+      "razonSocial": "cleveland",
+      "email": "correo@example.com",
+      "cuit": "20454848068",
+      "direccion": "avellaneda 263",
+      "telefono": "",
+      "password": "$2b$10$IlK3W5mPCKwDoVqwL38X3.65a1NCVyvzY1xWBeFhu6LtG4Ge9ZQd6",
+      "firstLogin": false,
+      "id": 1
+    },
+    {
+      "razonSocial": "epec",
+      "email": "correo2@example.com",
+      "cuit": "20454848068",
+      "direccion": "avellaneda 263",
+      "telefono": "",
+      "password": "$2b$10$55tNuSsyBcqvzEO2mBq6yOKlj9MyX7zcjcz6bInC0PJz57KpsOpla",
+      "firstLogin": false,
+      "id": 2
+    }
+  ],
   "admin": [
     {
       "id": "1",
       "email": "admin@sau.com",
-      "password": "$2b$10$r3e91UrJnbFaYqR37tEw9eYuyP98OPE/W2WhfeHgNtl6VWsMEKBfK"
+      "password": "$2b$10$iTU6yYVjKnj2URE43g85GO6GeAgcOhUauGTJ1.aSyh0lRZ2/ozMfO"
     }
   ],
   "alumnos_simulados": [
@@ -13,7 +34,7 @@
       "nombre": "Alumno Test",
       "email": "alumno@test.com",
       "legajo": "11111",
-      "password": "$2b$10$qKDA95JFOsQUD5WPN1/11eCGDl9bTpC0B.I58IA2O5iMrW289soZu"
+      "password": "$2b$10$vjQDE0UjrAs1GPlulkJtZu3.UbSJCo4uXWl6OFk3ogCDAS2IrzgH."
     }
   ]
 }

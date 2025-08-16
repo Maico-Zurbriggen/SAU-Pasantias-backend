@@ -6,10 +6,10 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const { sendResetEmail } = require('./utils/resetPassword');
-const { verifyPassword } = require('./utils/passwordUtils');
+const { verifyPassword, hashPassword } = require('./utils/passwordUtils');
 
 server.use(cors({
-  origin: 'https://maico-zurbriggen.github.io',
+  origin: ['https://maico-zurbriggen.github.io', 'http://localhost:5173'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -17,6 +17,25 @@ server.use(cors({
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
+
+// Middleware para hashear contraseñas antes de guardar
+server.use(async (req, res, next) => {
+  // Solo procesar solicitudes POST o PUT que contengan una contraseña
+  if ((req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') && req.body && req.body.password) {
+    // Verificar si la ruta es para empresas, admin o alumnos
+    const path = req.path.toLowerCase();
+    if (path.includes('/empresas') || path.includes('/admin') || path.includes('/alumnos_simulados')) {
+      // Hashear la contraseña
+      req.body.password = await hashPassword(req.body.password);
+      
+      // Si es un nuevo registro de empresa, establecer firstLogin en true
+      if (req.method === 'POST' && path.includes('/empresas') && !req.body.hasOwnProperty('firstLogin')) {
+        req.body.firstLogin = true;
+      }
+    }
+  }
+  next();
+});
 
 // Ruta para solicitar reset de contraseña
 server.post('/request-reset', async (req, res) => {
@@ -67,7 +86,7 @@ server.post('/reset-password', async (req, res) => {
     } else if (userType === 'empresa') {
       db.get('empresas')
         .find({ email })
-        .assign({ password: hashedPassword })
+        .assign({ password: hashedPassword, firstLogin: false })
         .write();
     }
 
@@ -78,12 +97,13 @@ server.post('/reset-password', async (req, res) => {
   }
 });
 
-server.use(router);
-
 // Ruta para login
 server.post('/login', async (req, res) => {
+  console.log("Request body:", req.body);
   const { email, password, userType } = req.body;
+
   const db = router.db;
+  console.log("Request body:", req.body);
 
   try {
     // Buscar usuario
@@ -97,12 +117,14 @@ server.post('/login', async (req, res) => {
     }
 
     if (!user) {
+      console.log("Usuario no encontrado");
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
 
     // Verificar contraseña
     const passwordMatch = await verifyPassword(password, user.password);
     if (!passwordMatch) {
+      console.log("Contraseña incorrecta");
       return res.status(401).json({ error: 'Contraseña incorrecta' });
     }
 
@@ -119,7 +141,7 @@ server.post('/login', async (req, res) => {
         id: user.id,
         email: user.email,
         userType,
-        // Otros datos del usuario que quieras enviar
+        firstLogin: user.firstLogin
       }
     });
   } catch (error) {
@@ -127,6 +149,8 @@ server.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Error al procesar la solicitud' });
   }
 });
+
+server.use(router);
 
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
