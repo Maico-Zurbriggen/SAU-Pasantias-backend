@@ -4,7 +4,7 @@
     {
       "id": "1",
       "email": "admin@sau.com",
-      "password": "admin123"
+      "password": "$2b$10$r3e91UrJnbFaYqR37tEw9eYuyP98OPE/W2WhfeHgNtl6VWsMEKBfK"
     }
   ],
   "alumnos_simulados": [
@@ -13,7 +13,7 @@
       "nombre": "Alumno Test",
       "email": "alumno@test.com",
       "legajo": "11111",
-      "password": "alumno123"
+      "password": "$2b$10$qKDA95JFOsQUD5WPN1/11eCGDl9bTpC0B.I58IA2O5iMrW289soZu"
     }
   ]
 }
